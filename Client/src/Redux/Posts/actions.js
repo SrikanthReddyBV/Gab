@@ -29,7 +29,7 @@ export const likeapost = (payload) => (dispatch) => {
   const { id, token } = payload;
   axios
     .patch(
-      `https://secure-ravine-45527.herokuapp.com/posts/${id}/like`,
+      `https://gab-backend.herokuapp.com/posts/${id}/like`,
       {},
       {
         headers: {
@@ -55,7 +55,7 @@ export const getFeedPosts = (token) => (dispatch) => {
   const getPostAct = addGetPostsRequest();
   dispatch(getPostAct);
   axios
-    .get("http://localhost:2222/posts/user/feed", {
+    .get("https://gab-backend.herokuapp.com/posts/user/feed", {
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -74,7 +74,7 @@ export const getHotPosts = () => (dispatch) => {
   const getPostAct = addGetPostsRequest();
   dispatch(getPostAct);
   axios
-    .get("http://localhost:2222/posts/top20")
+    .get("https://gab-backend.herokuapp.com/posts/top20")
     .then((res) => {
       const successAction = addGetPostsSuccess(res.data.posts);
       dispatch(successAction);
@@ -88,7 +88,7 @@ export const getHotPosts = () => (dispatch) => {
 export const createAPost = (payload) => (dispatch) => {
   const { token, post } = payload;
   axios
-    .post("http://localhost:2222/posts", post, {
+    .post("https://gab-backend.herokuapp.com/posts", post, {
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -103,7 +103,7 @@ export const createAPost = (payload) => (dispatch) => {
 
 export const getTimeline = (payload) => (dispatch) => {
   axios
-    .get("http://localhost:2222/posts/user/timeline")
+    .get("https://gab-backend.herokuapp.com/posts/user/timeline")
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };

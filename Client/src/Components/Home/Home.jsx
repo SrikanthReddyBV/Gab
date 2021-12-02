@@ -51,7 +51,7 @@ export const Home = ({ page }) => {
   const handlePost = async () => {
     await axios
       .post(
-        "https://secure-ravine-45527.herokuapp.com/posts",
+        "https://gab-backend.herokuapp.com/posts",
         {
           content: post,
         },

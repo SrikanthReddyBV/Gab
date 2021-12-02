@@ -42,7 +42,7 @@ export const Explore = ({ page }) => {
 
   useEffect(() => {
     axios
-      .get("https://secure-ravine-45527.herokuapp.com/groups", {
+      .get("https://gab-backend.herokuapp.com/groups", {
         headers: {
           Authorization: "Bearer " + token,
         },

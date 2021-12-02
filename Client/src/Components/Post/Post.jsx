@@ -63,7 +63,7 @@ export const Post = ({
 
     await axios
       .post(
-        "https://secure-ravine-45527.herokuapp.com/comments/newcomment",
+        "https://gab-backend.herokuapp.com/comments/newcomment",
         newComment,
         {
           headers: { Authorization: "Bearer " + token },

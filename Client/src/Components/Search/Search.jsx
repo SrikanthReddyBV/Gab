@@ -53,7 +53,7 @@ export const Search = ({ q }) => {
   const handleFollow = async (id, action) => {
     axios
       .patch(
-        `https://secure-ravine-45527.herokuapp.com/users/${id}/${action}`,
+        `https://gab-backend.herokuapp.com/users/${id}/${action}`,
         {},
         { headers: { Authorization: "Bearer " + token } }
       )
@@ -66,13 +66,13 @@ export const Search = ({ q }) => {
     setData({ ...data, isLoading: true });
     let users;
     await axios
-      .get(`https://secure-ravine-45527.herokuapp.com/users/search?q=${q}`)
+      .get(`https://gab-backend.herokuapp.com/users/search?q=${q}`)
       .then((res) => {
         users = res.data.users;
       });
     let groups;
     await axios
-      .get(`https://secure-ravine-45527.herokuapp.com/groups/search?q=${q}`)
+      .get(`https://gab-backend.herokuapp.com/groups/search?q=${q}`)
       .then((res) => {
         groups = res.data.groups;
       });

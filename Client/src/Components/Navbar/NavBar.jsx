@@ -53,7 +53,7 @@ export const Navbar = ({ page }) => {
     }
   };
   const handleSetNot = async () => {
-    await axios.patch("http://localhost:2222/users/" + user._id, {
+    await axios.patch("https://gab-backend.herokuapp.com/users/" + user._id, {
       notifications: [],
     });
   };

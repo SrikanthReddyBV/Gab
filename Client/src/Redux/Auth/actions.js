@@ -55,7 +55,7 @@ export const loginUser = (payload) => (dispatch) => {
   const reqAction = addLoginRequest();
   dispatch(reqAction);
   axios
-    .post("http://localhost:2222/users/signin", {
+    .post("https://gab-backend.herokuapp.com/users/signin", {
       email,
       password,
     })
@@ -76,7 +76,7 @@ export const loginUser = (payload) => (dispatch) => {
 
 export const getLoggedinUser = (payload) => (dispatch) => {
   axios
-    .get("http://localhost:2222/users/me", {
+    .get("https://gab-backend.herokuapp.com/users/me", {
       headers: { Authorization: "Bearer " + payload },
     })
     .then((res) => {

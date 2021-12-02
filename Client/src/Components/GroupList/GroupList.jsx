@@ -48,7 +48,7 @@ export const GroupList = () => {
   const fetchData = async () => {
     setData({ ...data, isLoading: true });
     await axios
-      .get("https://secure-ravine-45527.herokuapp.com/groups", {
+      .get("https://gab-backend.herokuapp.com/groups", {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
@@ -60,11 +60,7 @@ export const GroupList = () => {
   const handleJoin = async (group_id) => {
     const headers = { Authorization: "Bearer " + token };
     await axios
-      .patch(
-        `https://secure-ravine-45527.herokuapp.com/groups/join/${group_id}`,
-        {},
-        { headers }
-      )
+      .patch(`https://gab-backend.herokuapp.com/${group_id}`, {}, { headers })
       .then((res) => {
         alert(res);
       });

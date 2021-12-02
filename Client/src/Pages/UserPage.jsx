@@ -11,10 +11,12 @@ export const UserPage = () => {
   const [user, setUser] = useState();
 
   const fetchData = async () => {
-    await axios.get(`http://localhost:2222/users/${userid}`).then((res) => {
-      console.log(res.data);
-      setUser(res.data);
-    });
+    await axios
+      .get(`https://gab-backend.herokuapp.com/users/${userid}`)
+      .then((res) => {
+        console.log(res.data);
+        setUser(res.data);
+      });
   };
 
   useEffect(() => {
