@@ -33,7 +33,7 @@ import {
   ShowAllDiv,
 } from "./GroupListStyles";
 import { AiFillHome } from "react-icons/ai";
-import { MdNotifications } from "react-icons/md";
+import { MdNotifications, MdGroups } from "react-icons/md";
 import { IoChatbubblesSharp } from "react-icons/io5";
 import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
@@ -104,7 +104,7 @@ export const GroupList = () => {
 
             <LeftNavItem>
               <IconDiv>
-                <AiFillHome size="1rem" />
+                <MdGroups size="1rem" />
               </IconDiv>
               <IconDivText>Groups</IconDivText>
             </LeftNavItem>

@@ -1,5 +1,6 @@
 import { createContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import {
   loginUser,
   logoutUser,
@@ -14,6 +15,7 @@ export const AuthContextProvider = ({ children }) => {
   const { userState, postState } = useSelector((state) => state);
   const { isLoggedIn, token, user } = userState;
   const { posts, isLoading } = postState;
+  const history = useHistory();
   const dispatch = useDispatch();
   // handle like dispatches like/dislike action
 
@@ -32,6 +34,7 @@ export const AuthContextProvider = ({ children }) => {
   // handleSignup dispatches signup action
   const handleSignup = async (data) => {
     const signupAction = registerUser(data);
+    console.log(signupAction);
     dispatch(signupAction);
   };
 
@@ -39,6 +42,7 @@ export const AuthContextProvider = ({ children }) => {
   const handleSignout = async () => {
     const logoutAction = logoutUser();
     dispatch(logoutAction);
+    history.push("/");
   };
 
   // fetchUser dispatches user fetch action
@@ -67,7 +71,7 @@ export const AuthContextProvider = ({ children }) => {
     } else {
       fetchPosts();
     }
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <AuthContext.Provider

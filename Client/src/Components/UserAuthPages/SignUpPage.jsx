@@ -47,7 +47,7 @@ export const SignUpPage = () => {
       : setMatch(true);
   };
 
-  const { handleLogin, isLoggedIn } = useContext(AuthContext);
+  const { handleSignup, isLoggedIn } = useContext(AuthContext);
 
   if (isLoggedIn) return <Redirect to="/" />;
 
@@ -60,8 +60,9 @@ export const SignUpPage = () => {
       </Box>
       <Wrapper>
         <form
-          onSubmit={() => {
-            handleSetData();
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSignup(detail);
           }}
         >
           <Heading>Sign up for Gab</Heading>

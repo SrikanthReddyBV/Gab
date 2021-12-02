@@ -27,7 +27,7 @@ export default function Messanger() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const socket = useRef();
-  const {user} = useContext(AuthContext);
+  const { user,token } = useContext(AuthContext);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const pic = useRef("");
@@ -37,13 +37,12 @@ export default function Messanger() {
   const [searchedUser, setSearchedUser] = useState([]);
   const [addedConvRes, setAddedConvRes] = useState([])
   const myFriend = useRef(null)
+  console.log(messages)
 
   const handleFollowingSearch = (item) => {
-    console.log("w",user.following)
     const followingData = user.following;
     for (var i = 0; i < followingData.length; i++) {
-      if (followingData[i].username === item) {
-        console.log(item)
+      if (followingData[i].username === item.toLowerCase() || followingData[i].username === item.toUpperCase()) {
         setSearchedUser([...searchedUser, followingData[i]])
         console.log(searchedUser)
       }
@@ -111,11 +110,11 @@ export default function Messanger() {
       console.log(err);
     }
   };
-  // const getNotify = async() =>{
-  //   await axios.patch("http://localhost:2222/users/notify", {type:"message", fId: myFriend.current},{headers:{Authorization: "Bearer " + token}})
-  //   .then((res) => console.log(res))
-  //   .catch((err)=> console.log(err))
-  // }
+  const getNotify = async() =>{
+    await axios.patch("http://localhost:2222/users/notify", {type:"message", fId: myFriend.current},{headers:{Authorization: "Bearer " + token}})
+    .then((res) => console.log(res))
+    .catch((err)=> console.log(err))
+  }
 
   const getMessages = async () => {
     try {
@@ -179,7 +178,7 @@ export default function Messanger() {
             <div className="modalTop">New Message</div>
             <img
               onClick={() => setHide(!hide)}
-              src="https://cdn-icons-png.flaticon.com/512/748/748122.png"
+              src="https://cdn-icons.flaticon.com/png/512/2723/premium/2723639.png?token=exp=1636786544~hmac=32286f631f75b972489a96fd65fa0b17"
               alt=""
               className="crossButton"
             />
@@ -318,7 +317,12 @@ export default function Messanger() {
                       rows="10"
                       className="chatMessageInput"
                     ></textarea>
-                    <button onClick={handleSubmit} className="chatSubmitButton">
+                    <button onClick={(e) =>{
+
+                      handleSubmit(e)
+                      getNotify()
+                    }
+                    } className="chatSubmitButton">
                       Send
                     </button>
                   </div>

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AiFillHome } from "react-icons/ai";
-import { MdNotifications } from "react-icons/md";
+import { MdNotifications, MdGroups } from "react-icons/md";
 import { IoChatbubblesSharp } from "react-icons/io5";
 import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
@@ -61,12 +61,14 @@ export const Groups = ({ page }) => {
               <IconDiv>
                 <IoChatbubblesSharp size="1rem" />
               </IconDiv>
-              <IconDivText onClick={() => history.push("/messanger")}>Chats</IconDivText>
+              <IconDivText onClick={() => history.push("/messanger")}>
+                Chats
+              </IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "Groups"}>
               <IconDiv>
-                <AiFillHome size="1rem" />
+                <MdGroups size="1rem" />
               </IconDiv>
               <IconDivText>Groups</IconDivText>
             </LeftNavItem>
@@ -75,14 +77,18 @@ export const Groups = ({ page }) => {
               <IconDiv>
                 <BsGlobe2 size="1rem" />
               </IconDiv>
-              <IconDivText onClick={() => history.push("/explore")}>Explore</IconDivText>
+              <IconDivText onClick={() => history.push("/explore")}>
+                Explore
+              </IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "News"}>
               <IconDiv>
                 <TiDocumentText size="1rem" />
               </IconDiv>
-              <IconDivText onClick={() => history.push("/news")}>News</IconDivText>
+              <IconDivText onClick={() => history.push("/news")}>
+                News
+              </IconDivText>
             </LeftNavItem>
           </LeftNavDiv>
         </Left>

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
-import { MdNotifications } from "react-icons/md";
+import { MdNotifications, MdGroups } from "react-icons/md";
 import { IoChatbubblesSharp } from "react-icons/io5";
 import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
@@ -100,7 +100,7 @@ export const Home = ({ page }) => {
 
             <LeftNavItem isSelected={page === "Groups"}>
               <IconDiv>
-                <AiFillHome size="1rem" />
+                <MdGroups size="1rem" />
               </IconDiv>
               <IconDivText onClick={() => history.push("/groups")}>
                 Groups
@@ -136,11 +136,20 @@ export const Home = ({ page }) => {
               </PostPicTop>
               <PostPicDivider />
               <PostInput
-                onChange={(e) => setPost(e.target.value)}
+                onChange={(e) => {
+                  setPost(e.target.value);
+                }}
                 value={post}
                 placeholder="What's on your mind?"
               />
-              <PostBtn onClick={handlePost}>Post</PostBtn>
+              <PostBtn
+                onClick={() => {
+                  handlePost();
+                  setPost("");
+                }}
+              >
+                Post
+              </PostBtn>
             </PostDiv>
           )}
 

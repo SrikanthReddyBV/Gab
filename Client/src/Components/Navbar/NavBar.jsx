@@ -6,6 +6,7 @@ import { MdNotifications, MdGroups, MdLightbulb } from "react-icons/md";
 import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
 import { IoChatbubblesSharp } from "react-icons/io5";
+import { FaChevronRight } from "react-icons/fa";
 import {
   NavContainer,
   NavDiv,
@@ -24,44 +25,42 @@ import {
   NavUserPic,
   NavLogin,
   NavSignup,
-  UserPop,
+  ProfilePopUp,
+  ProfilePopDiv,
+  PopDivider,
+  NotificationDot,
 } from "./NavbarStyles";
-import { Router, useHistory } from "react-router";
-import { Popover } from "@mui/material";
+import { useHistory } from "react-router";
+
+import { useLocation } from "react-router-dom";
+
 import axios from "axios";
 
 export const Navbar = ({ page }) => {
   const { handleTheme, theme } = useContext(ThemeContext);
   const [q, setQ] = useState("");
-  const [popup, setPopup] = useState(false); //
-  const [show, setShow] = useState(false);
-  const { isLoggedIn, handleLogin, handleSignup, user } =
-    useContext(AuthContext);
-  const history = useHistory();
-  // Material UI POPUP
-  const [anchorEl, setAnchorEl] = useState(null);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const [toggleValue, setToggleValue] = useState(true); //
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const { isLoggedIn, user, handleSignout } = useContext(AuthContext);
+  const history = useHistory();
+  const location = useLocation();
 
   const handleSearch = async () => {
-    history.push(`/search?q=${q}`);
+    if (location.pathname !== "/search") history.push(`/search?q=${q}`);
+    else {
+      history.push(`/search?q=${q}`);
+      window.location.reload();
+    }
   };
   const handleSetNot = async () => {
     await axios.patch("http://localhost:2222/users/" + user._id, {
       notifications: [],
     });
   };
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-  // _______________________________________________________
+
   return (
     <>
-      <NavDiv>
+      <NavDiv onMouseLeave={() => setToggleValue(true)}>
         <NavContainer>
           <NavLogoDiv onClick={() => history.push("/")}>
             <NavLogo
@@ -154,8 +153,15 @@ export const Navbar = ({ page }) => {
             </NavMenuRoundedItem>
 
             <NavMenuRoundedItem>
+              {user?.notifications?.length > 0 && (
+                <NotificationDot></NotificationDot>
+              )}
               <NavRoundedDiv>
-                <IoChatbubblesSharp size="1.5rem" color="#999999" />
+                <IoChatbubblesSharp
+                  onClick={() => history.push("/messanger")}
+                  size="1.5rem"
+                  color="#999999"
+                />
               </NavRoundedDiv>
             </NavMenuRoundedItem>
 
@@ -169,31 +175,28 @@ export const Navbar = ({ page }) => {
               <VerticalSeparater />
             </NavMenuItemText>
 
-            <NavMenuRoundedItem
-              onClick={(e) => {
-                handleClick(e);
-              }}
-            >
+            <NavMenuRoundedItem onClick={() => setToggleValue(!toggleValue)}>
+              {/* Popover */}
+              <ProfilePopUp hidden={toggleValue}>
+                <ProfilePopDiv onClick={() => history.push("/me")}>
+                  <div>Profile</div>
+                  <div>
+                    <FaChevronRight />
+                  </div>
+                </ProfilePopDiv>
+                <PopDivider />
+
+                <ProfilePopDiv onClick={handleSignout}>
+                  <div>Signout</div>
+                  <div>
+                    <FaChevronRight />
+                  </div>
+                </ProfilePopDiv>
+                <PopDivider />
+              </ProfilePopUp>
+
               <NavUserPic src={user?.profile_pic} alt="user" />
             </NavMenuRoundedItem>
-            <UserPop>
-              <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-              >
-                <p>hello</p>
-              </Popover>
-            </UserPop>
           </NavMenuContainer>
           {!isLoggedIn && (
             <>

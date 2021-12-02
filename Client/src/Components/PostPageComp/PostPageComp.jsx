@@ -15,12 +15,6 @@ import {
   Right,
   RightSideCard,
   ShowAllDiv,
-  GroupWrapper,
-  GroupImgDiv,
-  GroupImg,
-  GroupDetailsDiv,
-  GroupTitle,
-  GroupFollowersCount,
   AboutDiv,
   AboutRow,
   AboutItem,
@@ -31,7 +25,6 @@ import { MdNotifications } from "react-icons/md";
 import { IoChatbubblesSharp } from "react-icons/io5";
 import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
-import { AuthContext } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router";
 export const PostPageComp = () => {
   const history = useHistory();

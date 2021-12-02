@@ -3,7 +3,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { BsGlobe2 } from "react-icons/bs";
 import { IoChatbubblesSharp } from "react-icons/io5";
-import { MdNotifications } from "react-icons/md";
+import { MdNotifications, MdGroups } from "react-icons/md";
 import { TiDocumentText } from "react-icons/ti";
 import { Middle } from "../Home/HomeStyles";
 import axios from "axios";
@@ -42,7 +42,6 @@ import {
   UsernameDiv,
 } from "./SearchStyles";
 import { MdVerified } from "react-icons/md";
-import { GroupTitle } from "../Groups/GroupStyles";
 
 export const Search = ({ q }) => {
   const [data, setData] = useState({ users: [], groups: [], isLoading: true });
@@ -115,7 +114,7 @@ export const Search = ({ q }) => {
 
             <LeftNavItem>
               <IconDiv>
-                <AiFillHome size="1rem" />
+                <MdGroups size="1rem" />
               </IconDiv>
               <IconDivText>Groups</IconDivText>
             </LeftNavItem>

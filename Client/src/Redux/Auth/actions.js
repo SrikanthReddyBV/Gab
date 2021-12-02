@@ -30,7 +30,25 @@ export const logoutUser = () => {
   };
 };
 
-export const registerUser = (payload) => (dispatch) => {};
+export const registerUser = (payload) => (dispatch) => {
+  payload.display_name = "add a name";
+  console.log(payload);
+  axios
+    .post("http://localhost:2222/users/signup", payload)
+    .then((res) => {
+      console.log(res);
+      const sucAction = addLoginSuccess({
+        token: res.data.token,
+        user: res.data.user,
+      });
+      dispatch(sucAction);
+    })
+    .catch((err) => {
+      console.log(err);
+      const errAction = addLoginFailure(err);
+      dispatch(errAction);
+    });
+};
 
 export const loginUser = (payload) => (dispatch) => {
   const { email, password } = payload;
