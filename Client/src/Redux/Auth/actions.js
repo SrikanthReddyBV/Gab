@@ -34,7 +34,7 @@ export const registerUser = (payload) => (dispatch) => {
   payload.display_name = "add a name";
   console.log(payload);
   axios
-    .post("http://localhost:2222/users/signup", payload)
+    .post("https://gab-backend.herokuapp.com/users/signup", payload)
     .then((res) => {
       console.log(res);
       const sucAction = addLoginSuccess({
